@@ -2,22 +2,6 @@
 
 _Extremely thin HTTP wrapper around the [MicroDot pHAT](https://shop.pimoroni.com/products/microdot-phat)_
 
-## Running it
-
-    make install
-
-then
-
-    python webserver.py
-
-ought to do it. You'll also need `foreman` to install the `systemd` startup scripts, probably
-
-    gem install foreman
-
-then
-
-    make foreman
-
 ## API
 
 ### `/lights`
@@ -44,3 +28,19 @@ Accepts a `PATCH` with an `application/json` payload, representing the desired s
       ],
       "decimals": [1, 3, 5]
     }
+
+## Running it
+
+    make install
+
+then
+
+    python webserver.py
+
+ought to do it. You'll also need `foreman` to install the `systemd` startup scripts, probably
+
+    gem install foreman
+
+then
+
+    make foreman
