@@ -29,12 +29,11 @@ def lights():
 
     render(matrix, decimals)
 
-    return json.dumps({
-            'success': True
-        }
-        ), 200, {
-            'ContentType': 'application/json'
-        }
+    status = {'success': True}, \
+             200, \
+             {'ContentType': 'application/json'}
+
+    return json.dumps(status)
 
 
 if __name__ == "__main__":

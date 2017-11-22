@@ -1,16 +1,32 @@
 # pHAT REST
 
-_Extremely thin wrapper around the [MicroDot pHAT](https://shop.pimoroni.com/products/microdot-phat)_
+_Extremely thin HTTP wrapper around the [MicroDot pHAT](https://shop.pimoroni.com/products/microdot-phat)_
+
+## Running it
+
+    make install
+
+then
+
+    python webserver.py
+
+ought to do it. You'll also need `foreman` to install the `systemd` startup scripts, something like
+
+    sudo gem install foreman
+
+might work, then
+
+    make foreman
 
 ## API
 
 ### `/lights`
 
-Accepts a `PATCH` with a JSON payload, representing the desired state of the 45x7 grid of the pHAT:
+Accepts a `PATCH` with a JSON payload, representing the desired state of the 45x7 grid of the pHAT plus the row of six oddly-placed decimal points:
 
 
     {
-      "data": [
+      "matrix": [
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -25,5 +41,6 @@ Accepts a `PATCH` with a JSON payload, representing the desired state of the 45x
             0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,
             0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]
-      ]
+      ],
+      "decimals": [1, 3, 5]
     }
