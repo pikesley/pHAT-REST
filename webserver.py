@@ -11,7 +11,7 @@ from support import render
 
 @app.route("/")
 def index():
-  content = open('flask/README.md', 'r').read()
+  content = open('README.md', 'r').read()
   content = Markup(markdown.markdown(content))
   return render_template('index.html', **locals())
 
