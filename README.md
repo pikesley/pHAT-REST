@@ -10,11 +10,11 @@ then
 
     python webserver.py
 
-ought to do it. You'll also need `foreman` to install the `systemd` startup scripts, something like
+ought to do it. You'll also need `foreman` to install the `systemd` startup scripts, probably
 
-    sudo gem install foreman
+    gem install foreman
 
-might work, then
+then
 
     make foreman
 

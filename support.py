@@ -4,6 +4,7 @@ RASPI = os.uname()[1] == 'raspberrypi'
 
 if RASPI:
     from microdotphat import clear, show, set_pixel, set_decimal
+
     def render(matrix, decimals):
         clear()
 
@@ -43,4 +44,4 @@ else:
             except ValueError:
                 d += ' '
             d += '       '
-        print d 
+        print d

@@ -4,6 +4,9 @@ run:
 install:
 	sudo pip install -r requirements.txt
 
+lint:
+	flake8 *py 
+
 clean:
 	find . -name "*pyc" -delete
 
