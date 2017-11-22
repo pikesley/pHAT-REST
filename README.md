@@ -22,7 +22,7 @@ might work, then
 
 ### `/lights`
 
-Accepts a `PATCH` with a JSON payload, representing the desired state of the 45x7 grid of the pHAT plus the row of six oddly-placed decimal points:
+Accepts a `PATCH` with a `application/json` payload, representing the desired state of the 45x7 grid of the pHAT plus the row of six oddly-placed decimal points:
 
 
     {
