@@ -1,0 +1,7 @@
+*pyc
+
+bin/
+lib/
+*python2.7*
+pip-selfcheck.json
+.Python
