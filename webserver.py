@@ -1,12 +1,14 @@
 import markdown
 from flask import Flask
 from flask import request
+from flask import Response
 from flask import render_template
 from flask import Markup
 import json
 from support import render
 
 app = Flask(__name__)
+app.matrix = {}
 
 
 @app.route("/")
@@ -16,26 +18,25 @@ def index():
     return render_template('index.html', **locals())
 
 
-@app.route("/lights", methods=['PATCH'])
+@app.route("/lights", methods=['GET', 'PATCH'])
 def lights():
-    try:
-        matrix = json.loads(request.data)['matrix']
-    except KeyError:
-        matrix = [[]]
+    if request.method == 'GET':
+        return Response(json.dumps({'matrix': app.matrix}), status=200, mimetype='application/json')
 
-    try:
-        decimals = json.loads(request.data)['decimals']
-    except KeyError:
-        decimals = []
+    else:
+        try:
+            app.matrix = json.loads(request.data)['matrix']
+        except KeyError:
+            app.matrix = [[]]
 
-    render(matrix, decimals)
+        try:
+            decimals = json.loads(request.data)['decimals']
+        except KeyError:
+            decimals = []
 
-    status = \
-        {'success': True}, \
-        200, \
-        {'ContentType': 'application/json'}
+        render(app.matrix, decimals)
 
-    return json.dumps(status)
+        return Response(json.dumps({'success': True}), status=200, mimetype='application/json')
 
 
 if __name__ == "__main__":
