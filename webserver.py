@@ -8,7 +8,8 @@ import json
 from support import render
 
 app = Flask(__name__)
-app.matrix = {}
+app.matrix = []
+app.decimals = []
 
 
 @app.route("/")
@@ -21,7 +22,7 @@ def index():
 @app.route("/lights", methods=['GET', 'PATCH'])
 def lights():
     if request.method == 'GET':
-        return Response(json.dumps({'matrix': app.matrix}), status=200, mimetype='application/json')
+        return Response(json.dumps({'matrix': app.matrix, 'decimals': app.decimals}), status=200, mimetype='application/json')
 
     else:
         try:
@@ -30,11 +31,11 @@ def lights():
             app.matrix = [[]]
 
         try:
-            decimals = json.loads(request.data)['decimals']
+            app.decimals = json.loads(request.data)['decimals']
         except KeyError:
-            decimals = []
+            app.decimals = []
 
-        render(app.matrix, decimals)
+        render(app.matrix, app.decimals)
 
         return Response(json.dumps({'success': True}), status=200, mimetype='application/json')
 
