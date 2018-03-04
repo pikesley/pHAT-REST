@@ -1,5 +1,4 @@
 import markdown
-import codecs
 import json
 
 from flask import Flask
@@ -10,7 +9,7 @@ from flask import Markup
 from inky import render
 
 app = Flask(__name__)
-app.matrix = []
+app.display = []
 
 
 @app.route("/")
@@ -23,13 +22,15 @@ def index():
 @app.route("/paper", methods=['PATCH'])
 def lights():
     try:
-        app.matrix = json.loads(request.data.decode('utf-8'))['matrix']
+        app.display = json.loads(request.data.decode('utf-8'))['matrix']
     except KeyError:
-        app.matrix = [[]]
+        app.display = [[]]
 
-    render(app.matrix)
+    render(app.display)
 
-    return Response(json.dumps({'success': True}), status=200, mimetype='application/json')
+    return Response(
+        json.dumps({'success': True}), status=200, mimetype='application/json'
+    )
 
 
 if __name__ == "__main__":

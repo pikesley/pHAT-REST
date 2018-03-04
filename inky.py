@@ -1,6 +1,7 @@
 import inkyphat
 
-def render(matrix):
+
+def render(display):
     for x in range(inkyphat.WIDTH):
         for y in range(inkyphat.HEIGHT):
             inkyphat.putpixel((x, y), 0)
@@ -8,7 +9,7 @@ def render(matrix):
     for x in range(inkyphat.WIDTH):
         for y in range(inkyphat.HEIGHT):
             try:
-                inkyphat.putpixel((x, y), matrix[y][x])
+                inkyphat.putpixel((x, y), display[y][x])
             except(IndexError):
                 pass
 
