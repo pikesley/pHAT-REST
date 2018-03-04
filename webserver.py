@@ -1,5 +1,6 @@
 import markdown
 import json
+import inkyphat
 
 from flask import Flask
 from flask import request
@@ -32,6 +33,16 @@ def lights():
         json.dumps({'success': True}), status=200, mimetype='application/json'
     )
 
+@app.route("/dimensions", methods=['GET'])
+def dimensions():
+    data = {
+      "width": inkyphat.WIDTH,
+      "height": inkyphat.HEIGHT
+    }
+
+    return Response(
+        json.dumps(data), status=200, mimetype='application/json'
+    )
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
