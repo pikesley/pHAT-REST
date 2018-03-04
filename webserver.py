@@ -26,12 +26,13 @@ def lights():
 
     else:
         try:
-            app.matrix = json.loads(request.data)['matrix']
+            app.matrix = json.loads(request.data.decode('utf-8'))['matrix']
+
         except KeyError:
             app.matrix = [[]]
 
         try:
-            app.decimals = json.loads(request.data)['decimals']
+            app.decimals = json.loads(request.data.decode('utf-8'))['decimals']
         except KeyError:
             app.decimals = []
 
